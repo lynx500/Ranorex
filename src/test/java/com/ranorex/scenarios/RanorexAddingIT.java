@@ -30,7 +30,7 @@ public class RanorexAddingIT {
     public void userCanAddPersonToRanorex() {
         ranorexMainPage.setFirstName("Nika");
         ranorexMainPage.setLastName("Renaud");
-        ranorexMainPage.setGender("male");
+        ranorexMainPage.setGender("female");
         ranorexMainPage.setCategory("Sport");
         ranorexMainPage.clickAdd();
         assertEquals("Vip count after addition return incorrect value!", "VIP count: 1", ranorexMainPage.getVipCount());
