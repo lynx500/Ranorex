@@ -37,6 +37,9 @@ public class RanorexMainPage {
     @FindBy(id = "Clear")
     WebElement btnClear;
 
+    @FindBy(id = "connect")
+    WebElement btnDisconnect;
+
     public RanorexMainPage (WebDriver driver) {
         this.driver = driver;
         PageFactory.initElements(driver, this);
@@ -68,6 +71,14 @@ public class RanorexMainPage {
 
     public String getVipCount() {
         return vipCount.getText();
+    }
+
+    public void clickDisconnect() {
+        btnDisconnect.click();
+    }
+
+    public String getTextConnectButton() {
+        return btnDisconnect.getAttribute("value");
     }
 
     public void setGender(String strGender) {

@@ -5,12 +5,14 @@ import com.ranorex.util.PropertyLoader;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.htmlunit.HtmlUnitDriver;
 import org.openqa.selenium.ie.InternetExplorerDriver;
 
+import java.util.Set;
 import java.util.concurrent.TimeUnit;
 
 import static org.junit.Assert.assertEquals;
@@ -60,6 +62,29 @@ public class RanorexAddingIT {
         ranorexMainPage.addUser("ggg", "fff");
         ranorexMainPage.clickClear();
         assertEquals("Vip count after addition return incorrect value!", "VIP count: 0", ranorexMainPage.getVipCount());
+    }
+
+    @Test
+    public void userCanDisconnectDatabase() {
+        ranorexMainPage.clickDisconnect();
+        assertEquals("Text on the connect button doesn't match!", "Connect...", ranorexMainPage.getTextConnectButton());
+    }
+
+    @Test
+    public void checkPopUpWindowTextAfterClickingAddWithEmptyInput() {
+        String init = driver.getWindowHandle();
+        ranorexMainPage.clickAdd();
+        Set<String> handles = driver.getWindowHandles();
+        for(String handle : handles)
+        {
+            if(!init.equals(handle))
+            {
+                WebDriver popup = driver.switchTo().window(handle);
+                assertEquals("Incorrect PopUp Window title!", "VIP Database", popup.getTitle());
+                assertEquals("Incorrect text in popup window!", "Please specify 'First Name' value", popup.findElement(By.id("alertTextOK")).getText());
+                driver.findElement(By.cssSelector("button")).click();
+            }
+        }
     }
 
     @After
