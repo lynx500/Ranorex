@@ -101,5 +101,6 @@ public class RanorexMainPage {
     public void addUser(String firstName, String lastName) {
         setFirstName(firstName);
         setLastName(lastName);
+        clickAdd();
     }
 }

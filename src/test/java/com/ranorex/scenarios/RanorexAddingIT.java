@@ -2,9 +2,12 @@ package com.ranorex.scenarios;
 
 import com.ranorex.pages.RanorexMainPage;
 import com.ranorex.util.PropertyLoader;
+import junitparams.JUnitParamsRunner;
+import junitparams.Parameters;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
+import org.junit.runner.RunWith;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -17,6 +20,7 @@ import java.util.concurrent.TimeUnit;
 
 import static org.junit.Assert.assertEquals;
 
+@RunWith(JUnitParamsRunner.class)
 public class RanorexAddingIT {
     WebDriver driver;
     RanorexMainPage ranorexMainPage;
@@ -50,16 +54,18 @@ public class RanorexAddingIT {
     }
 
     @Test
-    public void userCanDeleteUser() {
-        ranorexMainPage.addUser("fff", "lll");
+    @Parameters({"Miranda, Snow"})
+    public void userCanDeleteUser(String firstName, String lastName) {
+        ranorexMainPage.addUser(firstName, lastName);
         ranorexMainPage.clickDelete();
         assertEquals("Vip count after addition return incorrect value!", "VIP count: 0", ranorexMainPage.getVipCount());
     }
 
     @Test
-    public void userCanClearDatabase() {
-        ranorexMainPage.addUser("ggg", "ttt");
-        ranorexMainPage.addUser("ggg", "fff");
+    @Parameters({"4556, $%^&*"})
+    public void userCanClearDatabase(String firstName, String lastName) {
+        ranorexMainPage.addUser(firstName, lastName);
+        ranorexMainPage.addUser(firstName, lastName);
         ranorexMainPage.clickClear();
         assertEquals("Vip count after addition return incorrect value!", "VIP count: 0", ranorexMainPage.getVipCount());
     }
