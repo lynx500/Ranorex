@@ -53,28 +53,28 @@ public class RanorexMainPage {
         lastName.sendKeys(strLastName);
     }
 
-    public void clickAdd() {
-        btnAdd.click();
+    public WebElement getBtnAdd() {
+        return btnAdd;
     }
 
-    public void clickDelete() {
-        btnDelete.click();
+    public WebElement getBtnDelete() {
+        return btnDelete;
     }
 
-    public void clickSave() {
-        btnSave.click();
+    public WebElement getBtnSave() {
+        return btnSave;
     }
 
-    public void clickClear() {
-        btnClear.click();
+    public WebElement getBtnClear() {
+        return btnClear;
     }
 
     public String getVipCount() {
         return vipCount.getText();
     }
 
-    public void clickDisconnect() {
-        btnDisconnect.click();
+    public WebElement getBtnDisconnect() {
+        return btnDisconnect;
     }
 
     public String getTextConnectButton() {
@@ -101,6 +101,5 @@ public class RanorexMainPage {
     public void addUser(String firstName, String lastName) {
         setFirstName(firstName);
         setLastName(lastName);
-        clickAdd();
     }
 }

@@ -48,7 +48,7 @@ public class RanorexAddingIT {
         ranorexMainPage.setLastName("Renaud");
         ranorexMainPage.setGender("female");
         ranorexMainPage.setCategory("Sport");
-        ranorexMainPage.clickAdd();
+        ranorexMainPage.getBtnAdd().click();
         assertEquals("Vip count after addition return incorrect value!", "VIP count: 1", ranorexMainPage.getVipCount());
         assertEquals("First row user doesn't have such first name!", "Nika", ranorexMainPage.getFirstNameFromTheTable());
     }
@@ -57,7 +57,7 @@ public class RanorexAddingIT {
     @Parameters({"Miranda, Snow"})
     public void userCanDeleteUser(String firstName, String lastName) {
         ranorexMainPage.addUser(firstName, lastName);
-        ranorexMainPage.clickDelete();
+        ranorexMainPage.getBtnDelete().click();
         assertEquals("Vip count after addition return incorrect value!", "VIP count: 0", ranorexMainPage.getVipCount());
     }
 
@@ -65,21 +65,23 @@ public class RanorexAddingIT {
     @Parameters({"4556, $%^&*"})
     public void userCanClearDatabase(String firstName, String lastName) {
         ranorexMainPage.addUser(firstName, lastName);
+        ranorexMainPage.getBtnAdd().click();
         ranorexMainPage.addUser(firstName, lastName);
-        ranorexMainPage.clickClear();
+        ranorexMainPage.getBtnAdd().click();
+        ranorexMainPage.getBtnClear().click();
         assertEquals("Vip count after addition return incorrect value!", "VIP count: 0", ranorexMainPage.getVipCount());
     }
 
     @Test
     public void userCanDisconnectDatabase() {
-        ranorexMainPage.clickDisconnect();
+        ranorexMainPage.getBtnDisconnect().click();
         assertEquals("Text on the connect button doesn't match!", "Connect...", ranorexMainPage.getTextConnectButton());
     }
 
     @Test
     public void checkPopUpWindowTextAfterClickingAddWithEmptyInput() {
         String init = driver.getWindowHandle();
-        ranorexMainPage.clickAdd();
+        ranorexMainPage.getBtnAdd().click();
         Set<String> handles = driver.getWindowHandles();
         for(String handle : handles)
         {
