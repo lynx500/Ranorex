@@ -5,15 +5,10 @@ import java.io.FileInputStream;
 import java.util.Properties;
 
 public class PropertyLoader {
-    public static String getBrowserName() throws Exception {
-        Properties props = new Properties();
-        props.load(new FileInputStream(new File("src/test/resources/config.properties")));
-        return props.getProperty("browser");
-    }
 
-    public static String getBaseURL() throws Exception {
+    public static String loadProperty(String name) throws Exception {
         Properties props = new Properties();
         props.load(new FileInputStream(new File("src/test/resources/config.properties")));
-        return props.getProperty("baseUrl");
+        return props.getProperty(name);
     }
 }

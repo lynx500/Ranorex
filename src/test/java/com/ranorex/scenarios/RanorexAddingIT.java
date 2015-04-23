@@ -27,7 +27,7 @@ public class RanorexAddingIT {
 
     @Before
     public void setUp() throws Exception {
-        String browser = PropertyLoader.getBrowserName();
+        String browser = PropertyLoader.loadProperty("browser");
         if ("firefox".equals(browser)) {
             driver = new FirefoxDriver();
         } else if ("ie".equals(browser)) {
@@ -38,7 +38,7 @@ public class RanorexAddingIT {
             driver = new HtmlUnitDriver();
         }
         driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
-        driver.get(PropertyLoader.getBaseURL());
+        driver.get(PropertyLoader.loadProperty("baseUrl"));
         ranorexMainPage = new RanorexMainPage(driver);
     }
 
