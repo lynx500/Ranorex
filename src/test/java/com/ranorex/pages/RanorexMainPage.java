@@ -14,16 +14,13 @@ public class RanorexMainPage {
     private WebDriver driver;
 
     @FindBy(id = "FirstName")
-    WebElement firstName;
+    WebElement fieldFirstName;
 
     @FindBy(id = "LastName")
-    WebElement lastName;
+    WebElement fieldLastName;
 
     @FindBy(id = "Add")
     WebElement btnAdd;
-
-    @FindBy(id = "Save")
-    WebElement btnSave;
 
     @FindBy(id = "Delete")
     WebElement btnDelete;
@@ -45,12 +42,12 @@ public class RanorexMainPage {
         PageFactory.initElements(driver, this);
     }
 
-    public void setFirstName(String strFirstName) {
-        firstName.sendKeys(strFirstName);
+    public WebElement getFieldFirstName() {
+        return fieldFirstName;
     }
 
-    public void setLastName(String strLastName) {
-        lastName.sendKeys(strLastName);
+    public WebElement getFieldLastName() {
+        return fieldLastName;
     }
 
     public WebElement getBtnAdd() {
@@ -59,10 +56,6 @@ public class RanorexMainPage {
 
     public WebElement getBtnDelete() {
         return btnDelete;
-    }
-
-    public WebElement getBtnSave() {
-        return btnSave;
     }
 
     public WebElement getBtnClear() {
@@ -96,10 +89,5 @@ public class RanorexMainPage {
 
     public String getFirstNameFromTheTable() {
         return driver.findElement(By.xpath("//table[@id='VIPs']/tbody/tr[2]/td[2]")).getText();
-    }
-
-    public void addUser(String firstName, String lastName) {
-        setFirstName(firstName);
-        setLastName(lastName);
     }
 }

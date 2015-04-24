@@ -44,8 +44,8 @@ public class RanorexAddingIT {
 
     @Test
     public void userCanAddPersonToRanorex() {
-        ranorexMainPage.setFirstName("Nika");
-        ranorexMainPage.setLastName("Renaud");
+        setFirstName("Nika");
+        setLastName("Renaud");
         ranorexMainPage.setGender("female");
         ranorexMainPage.setCategory("Sport");
         ranorexMainPage.getBtnAdd().click();
@@ -56,7 +56,7 @@ public class RanorexAddingIT {
     @Test
     @Parameters({"Miranda, Snow"})
     public void userCanDeleteUser(String firstName, String lastName) {
-        ranorexMainPage.addUser(firstName, lastName);
+        addUser(firstName, lastName);
         ranorexMainPage.getBtnDelete().click();
         assertEquals("Vip count after addition return incorrect value!", "VIP count: 0", ranorexMainPage.getVipCount());
     }
@@ -64,9 +64,9 @@ public class RanorexAddingIT {
     @Test
     @Parameters({"4556, $%^&*"})
     public void userCanClearDatabase(String firstName, String lastName) {
-        ranorexMainPage.addUser(firstName, lastName);
+        addUser(firstName, lastName);
         ranorexMainPage.getBtnAdd().click();
-        ranorexMainPage.addUser(firstName, lastName);
+        addUser(firstName, lastName);
         ranorexMainPage.getBtnAdd().click();
         ranorexMainPage.getBtnClear().click();
         assertEquals("Vip count after addition return incorrect value!", "VIP count: 0", ranorexMainPage.getVipCount());
@@ -98,5 +98,18 @@ public class RanorexAddingIT {
     @After
     public void tearDown() {
         driver.quit();
+    }
+
+    public void setFirstName(String strFirstName) {
+        ranorexMainPage.getFieldFirstName().sendKeys(strFirstName);
+    }
+
+    public void setLastName(String strLastName) {
+        ranorexMainPage.getFieldLastName().sendKeys(strLastName);
+    }
+
+    public void addUser(String firstName, String lastName) {
+        setFirstName(firstName);
+        setLastName(lastName);
     }
 }
