@@ -90,4 +90,17 @@ public class RanorexMainPage {
     public String getFirstNameFromTheTable() {
         return driver.findElement(By.xpath("//table[@id='VIPs']/tbody/tr[2]/td[2]")).getText();
     }
+
+    public void setFirstName(String strFirstName) {
+        getFieldFirstName().sendKeys(strFirstName);
+    }
+
+    public void setLastName(String strLastName) {
+        getFieldLastName().sendKeys(strLastName);
+    }
+
+    public void addUser(String firstName, String lastName) {
+        setFirstName(firstName);
+        setLastName(lastName);
+    }
 }
